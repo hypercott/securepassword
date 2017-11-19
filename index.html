@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <script>
+    function myFunction() {
+       var xhttp = new XMLHttpRequest();
+       xhttp.onreadystatechange = function() {
+       if (this.readyState == 4 && this.status == 200) {
+          var jsonResponse = JSON.parse(this.responseText);
+          document.getElementById("pass").innerHTML = jsonResponse['body'];
+          document.getElementById("copy-appear").innerHTML = '<button class="btn btn-success" onclick="copyToClipboard(\'#pass\')">Copy Password to Clipboard</button>';
+          }
+       };
+      xhttp.open("POST", "https://tvv9so4dz8.execute-api.us-west-2.amazonaws.com/prod/MyPasswordLambda2", true);
+      xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      var xlen = $("#lenslide").slider('getValue');
+      xhttp.send(JSON.stringify({pwlen: xlen}));
+    }
+    function copyToClipboard(element) {
+      var $temp = $("<input>");
+      $("body").append($temp);
+      $temp.val($(element).text()).select();
+      document.execCommand("copy");
+      $temp.remove();
+    }
+
+  </script>
+  
+  <head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-1583699095543070",
+      enable_page_level_ads: true
+      });
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109827249-1"></script>
+    <script>
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+
+       gtag('config', 'UA-109827249-1');
+    </script>
+
+
+    <meta name="msvalidate.01" content="9C30E1F2016E8376BA51CF13781A9517" />
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="password,passwords,secure passwords,custom passwords,random passwords">
+    <meta name="description" content="Generate secure passwords using random sequences of numbers, upper-case letters, lower-case letters, and symbols. Passwords are at least 16 characters and extremely hard to break. A 16 character password will require a computer to try for more than a trillion years.">
+    <meta name="author" content="Ott CS Consulting">
+    
+    <title>Secure Password</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap-slider/css/bootstrap-slider.min.css" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <style>
+      body {
+        padding-top: 54px;
+      }
+      @media (min-width: 992px) {
+        body {
+          padding-top: 46px;
+        }
+      }
+      html {
+        position: relative;
+        min-height: 100%;
+      }
+      body {
+        /* Margin bottom by footer height */
+        margin-bottom: 60px;
+      }
+      .footer {
+         position: absolute;
+         bottom: 0;
+         width: 100%;
+         /* Set the fixed height of the footer here */
+         height: 30px;
+         background-color: #fff;
+      }
+
+      #lenslideSlider .slider-selection {
+    	    background: #BABABA;
+      }
+      
+    </style>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">securepassword.net</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About/Links</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h1 class="mt-5">Secure Password Generator</h1>
+          <p class="lead">Secure random passwords!</p>
+          Password length: &nbsp; &nbsp;<input id="lenslide" type="text" data-slider-min="16" data-slider-max="32" data-slider-step="4" data-slider-value="20"/> &nbsp;<span id="lenslideSliderVal">20</span>
+	  <p style="margin: 0em 0;">&nbsp;</p>
+	  <p><button class="btn btn-primary" onclick="myFunction()">Click me to generate your password!</button></p>
+	  <p style="margin: 0em 0;">&nbsp;</p>
+	  <p class="lead" id="pass">&nbsp;</p>
+	  <p style="margin: -0.5em 0;">&nbsp;</p>
+	  <p><span id="copy-appear"><button class="btn" style="background-color:transparent">&nbsp;</button></span></p>
+
+	  <p class="lead">Some things to consider about passwords:</p>
+	</div>
+      </div>
+      <div class="row">
+	<div class="col-lg-6" style="display:flex;justify-content:center">
+	  <ul>
+	    <li style="margin: 0.5em 0;">Never re-use the same password.</li>
+	    <li style="margin: 0.5em 0;">You likely have more passwords than you can possibly remember. You don't have to.</li>
+	    <li style="margin: 0.5em 0;">Write your passwords down in a safe place. Use a password
+	      manager or an encrypted file. Set a strong master password that you can remember.</li>
+	    <li style="margin: 0.5em 0;">The strong passwords we generate are long
+	    (&ge; 16 characters), contain lower-case and upper-case
+	    letters, numbers, and symbols in a random
+	      arrangement. A computer will need more than a trillion years to crack
+	      one of our 16-character passwords.</li>
+	  </ul>
+	</div>
+	<div class="col-lg-6" style="display:flex;justify-content:center">
+	  <ul>
+	    <li style="margin: 0.5em 0;">Examples of strong human-memorizable master passwords
+	      are long phrases that don't make sense and don't
+	      show up in literature. "The Grass explodes like never
+	      before And we sing a Song." (you could use it without
+	      spaces if they are not allowed).</li>
+	    <li style="margin: 0.5em 0;">Never use single dictionary words, names, etc., even if you do some
+	      common replacements like "a &rarr; 8" etc.</li>
+	    <li style="margin: 0.5em 0;">You can check the strength of your password here: <a href="https://howsecureismypassword.net/">howsecureismypassword.net</a>.
+	  </ul>
+	</div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted" align="center">Ott CS Consulting, 2017</p>
+      </div>
+    </footer>
+
+    
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/bootstrap-slider/bootstrap-slider.js"></script>
+
+    <script type='text/javascript'>
+      $(document).ready(function() {
+
+        $("#lenslide").slider();
+        $("#lenslide").on("slide", function(slideEvt) {
+	  $("#lenslideSliderVal").text(slideEvt.value);
+        });
+
+      });
+    </script>
+
+    
+  </body>
+
+</html>
