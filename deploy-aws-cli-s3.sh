@@ -6,10 +6,10 @@ do
     aws s3 cp $FILE $S3BUCKET --acl public-read --cache-control "max-age=600"
 done
 
-DIRS="vendor"
+DIRS="vendor img"
 for DIR in $DIRS
 do
-    aws s3 cp $DIR $S3BUCKET --acl public-read --cache-control "max-age=600" --recursive
+    aws s3 cp $DIR $S3BUCKET/$DIR --acl public-read --cache-control "max-age=600" --recursive
 done
 
     
