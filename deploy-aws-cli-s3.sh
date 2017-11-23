@@ -1,5 +1,5 @@
 S3BUCKET="s3://securepassword.net"
-FILES="index.html resources.html about.html privacy.html"
+FILES="index.html resources.html about.html privacy.html encrypt_file.html"
 
 for FILE in $FILES
 do	    

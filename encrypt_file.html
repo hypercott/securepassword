@@ -54,7 +54,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">securepassword.net::resources</a>
+        <a class="navbar-brand" href="#">securepassword.net::encrypt file</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -66,7 +66,6 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="resources.html">Resources
-		<span class="sr-only">(current)</span>
 	      </a>
 	    </li>
 	    <li class="nav-item">
@@ -82,39 +81,46 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <h1 class="mt-5">Secure Password Resources</h1>
+          <h1 class="mt-5">Basics: Password Storage in an encrypted File</h1>
 
-	  <p>These resources are actively curated and regularly updated.</p>
+	  <p>The below should work on Linux of all flavors and on MacOS. It could
+	  also work on Windows with the Ubuntu Linux subsystem.</p>
 
 	</div>
       </div>
       <div class="row">
-	<div class="col-lg-6" style="justify-content:center">
-	  <p class="lead">Password Managers:</p>
-	  <ul>
-	    <li><a href="encrypt_file.html">Your own encrypted file.</a></li>
-	    <li><a href="https://1password.com">1Password</a></li>
-	    <li><a href="https://dashlane.com">Dashlane</a></li>
-	    <li><a href="https://bitwarden.com/">Bitwarden</a></li>
-	    <li><a href="https://lastpass.com">LastPassword</a></li>
-	    <li><a href="https://lesspass.com/">LessPass</a></li>
-	    <li><a href="https://clipperz.is/">clipperz</a></li>
-	    <li><a href="https://spideroak.com/encryptr/">Encryptr</a></li>
-	    <li><a href="https://keepass.info/">KeePass</a></li>
-	    <li><a href="https://pwsafe.org/">Password Safe</a></li>
-	  </ul>
-	</div>
-	<div class="col-lg-6" style="justify-content:center">
-	  <p class="lead">Links to other Resources:</p>
-	  <ul>
-	    <li><a href="https://xkcd.com/936/">XKCD on Passwords</a></li>
-	    <li><a href="https://lifehacker.com/four-methods-to-create-a-secure-password-youll-actually-1601854240">lifehacker.com: Four Methods to create a secure Password you'll actually remember.</li>
-	    <li><a href="https://jcs.org/2017/11/17/bitwarden">Joshua Stein: Switching from 1Password to Bitwarden</a>.</li>
-	    <li><a href="https://motherboard.vice.com/en_us/article/d3devm/motherboard-guide-to-not-getting-hacked-online-safety-guide">The Motherboard Guide to Not Getting Hacked</a>.</li>
-	    <li><a href="https://www.howtogeek.com/195430/how-to-create-a-strong-password-and-remember-it/">How-To Geek: How to create a strong password and remember it.</a></li>
-	    <li><a href="https://howsecureismypassword.net/">How Secure is My Password?</a></li>
-	    <li><a href="https://lastpass.com/howsecure.php">LastPass Password Strength Checker</a></li>
-	  </ul>
+	<div class="col-lg-12" style="justify-content:center">
+	  <p>First create a text file to store your passwords
+	  in. Let's call it <code>myfile.txt</code> (you want to give
+	  it an inconspicous name). Enter some passwords (or just some
+	  sample text). Next, we are going to <b>encrypt</b> the file
+	  using <code>openssl</code>. In a terminal, enter the
+	    following
+	    <pre><code>
+		$ openssl enc -aes-256-cbc -salt -in myfile.txt -out myfile.txt.enc
+	    </code></pre> It will prompt you twice for a
+	    password. Make sure to pick a strong password that you can
+	    remember (see <a href="resources.html">here for some
+	      guidance</a>). You now have an encrypted file and you should delete
+	    the unencrypted text file.</p>
+	  <p>
+	    For <b>decrypting</b>, use
+	    <pre><code>
+		$ openssl enc -aes-256-cbc -d -in myfile.txt.enc -out myfile.txt
+	    </code></pre> You'll of course be prompted for your
+	    password. In the above, we've used
+	    the <code>aes-256-cbc</code> cypher, which is a symmetric
+	    encryption cypher used by the US government for top secret
+	    information. The <code>-salt</code> option in the encryption command
+	    is important, because it strengthens the encryption when the key is derived
+	    from a password (as in our case).
+	  </p>
+	  <p>Don't forget to securely delete your plain text password
+	    file whenever you are done using it. Just deleting the
+	    file usually will keep information recoverable. On
+	    Linux/MacOS, you can use <code>shred</code>
+	    (or <code>gshred</code> on some systems) to overwrite a file with random
+	    information. You can then just delete it with <code>rm</code>.
 	</div>
       </div>
     </div>
